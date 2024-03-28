@@ -55,7 +55,7 @@
       --marker-gray: #97989A;
     }
 
-    #sungrow_bear_locations_map {
+    #locations_map {
       height: 100%;
       width: 100%;
       min-width: 800px;
@@ -314,7 +314,7 @@
 
 <body>
   <main id="primary" class="site-main template-locations">
-    <div class="map" id="sungrow_bear_locations_map"></div>
+    <div class="map" id="locations_map"></div>
   </main>
   <script type="text/javascript">
     ( async () => {
@@ -425,7 +425,7 @@
         const isPhone = window.innerWidth < 640;
 
         return new Map(
-          document.getElementById( "sungrow_bear_locations_map" ),
+          document.getElementById( "locations_map" ),
           {
             zoom: isPhone ? 9 : 10,
             center: isSmallScreen ? position_Worcester : position_ware,

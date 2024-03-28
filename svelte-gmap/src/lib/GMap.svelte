@@ -39,4 +39,4 @@
   });
 </script>
 
-<div class="map" id="sungrow_bear_locations_map"></div>
+<div class="map" id="locations_map"></div>
