@@ -1,3 +1,4 @@
+/// <reference types="@types/googlemaps" />
 import { Loader } from '@googlemaps/js-api-loader';
 
 const loader = new Loader( {
@@ -6,8 +7,8 @@ const loader = new Loader( {
   libraries: ['maps', 'marker'],
 } );
 
-export const Map = await loader.importLibrary( 'maps' );
-export const Marker = await loader.importLibrary( 'marker' );
+export const MapLib = await loader.importLibrary( 'maps' );
+export const MarkerLib = await loader.importLibrary( 'marker' );
 
 /**
  * This function takes the location_hours object from the location post type
@@ -51,8 +52,15 @@ export function displayBusinessHours ( data ) {
  * @returns {void}
  */
 export function withIntentfulInteraction ( element, callback ) {
+  /**
+   * @type {Date} mouseDownTime
+   */
   let mouseDownTime;
 
+  /**
+   * @param {MouseEvent} event 
+   * @returns 
+   */
   function startAction ( event ) {
     // Only proceed if the left button is pressed
     if ( event.button !== 0 ) {
@@ -66,6 +74,10 @@ export function withIntentfulInteraction ( element, callback ) {
     mouseDownTime = new Date();
   }
 
+  /**
+   * @param {MouseEvent} event 
+   * @returns 
+   */
   function endAction ( event ) {
     // Only proceed if the left button is released
     if ( event.button !== 0 ) {
@@ -76,7 +88,7 @@ export function withIntentfulInteraction ( element, callback ) {
     event.stopPropagation();
 
     let mouseUpTime = new Date();
-    let timeDiff = mouseUpTime - mouseDownTime;
+    let timeDiff = mouseUpTime.getTime() - mouseDownTime.getTime();
 
     // If the time difference is less than a certain threshold (e.g., 200 milliseconds), trigger the click event
     if ( timeDiff < 333 ) {

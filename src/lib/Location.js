@@ -1,3 +1,13 @@
+/// <reference types="@types/googlemaps" />
+
+import { MapLib, MarkerLib } from "./Utils";
+import { LocationsManager } from "./LocationsManager";
+
+/**
+ * @typedef {import('./types').LocationMeta} LocationMeta
+ * @typedef {import('./types').StoreLocation} StoreLocation
+ */
+
 /**
  * This class represents a location on the map,
  * and contains other useful information and utility
@@ -57,12 +67,12 @@ export class Location {
       meta.gps_coordinates.longitude
     );
 
-    this.infoWindow = new InfoWindow( {
+    this.infoWindow = new google.maps.InfoWindow( {
       content: `
               <div class="info-window">
                 <h3>${this.title}</h3>
-                <p>${this.meta.address.value}</p>
-                <p><a href="${this.meta.google_maps_link.value}" target="_blank">Directions</a></p>
+                <p>${this.meta.address}</p>
+                <p><a href="${this.meta.google_maps_link}" target="_blank">Directions</a></p>
               </div>
             `,
     } );
@@ -71,7 +81,7 @@ export class Location {
       this.infoWindow,
       'closeclick',
       () => {
-        this.closeAdditionalMetaDrawer();
+
       }
     );
 
@@ -91,7 +101,7 @@ export class Location {
               `
     );
 
-    const marker = new AdvancedMarkerElement( {
+    const marker = new MarkerLib.AdvancedMarkerElement( {
       map: map,
       position: this.position,
       title: title,
@@ -121,7 +131,6 @@ export class Location {
   clickHandler () {
     if ( this.infoWindowState ) {
       this.infoWindow.close();
-      this.closeAdditionalMetaDrawer();
       this.infoWindowState = false;
     } else {
       this.locationsManager.closeAllInfoWindows();
@@ -130,7 +139,6 @@ export class Location {
         this.map,
         this.marker
       );
-      this.openAdditionalMetaDrawer();
     }
   }
 

@@ -46,7 +46,7 @@ class StoreLocation {
 
   /**
    * @param {string} title 
-   * @param {string} meta 
+   * @param {LocationMeta} meta 
    */
   constructor( title, meta ) {
     this.title = title;
